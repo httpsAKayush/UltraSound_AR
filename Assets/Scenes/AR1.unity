@@ -399,6 +399,75 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &361866166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 361866168}
+  - component: {fileID: 361866167}
+  - component: {fileID: 361866169}
+  m_Layer: 0
+  m_Name: CameraFeedReceiver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &361866167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361866166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97607af9087d61068cf04e7a427f4af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  serverIP: 10.236.31.25
+  serverPort: 5000
+  reconnectDelaySec: 2
+  initialWidth: 1280
+  initialHeight: 720
+  isConnected: 0
+  framesReceived: 0
+--- !u!4 &361866168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361866166}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.90018, y: -0, z: -4.23041}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &361866169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361866166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b966c8ba9d481d3dca74c05289059c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  feedPrefab: {fileID: 5336289925268075003, guid: ff4905432def8a16889e1e9aeffa7cf3, type: 3}
+  spawnDistance: 1
+  verticalOffset: -0.1
+  cameraTransform: {fileID: 0}
+  placementUI: {fileID: 674460041}
 --- !u!1 &421646001
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,8 +820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MetaXR.LofiStudy.ARFoundation.ObjectPlacementSelectionUI
   m_OptionButtons:
   - {fileID: 1713521788}
-  m_OptionPrefabs:
-  - {fileID: 4989683340034386119, guid: d3faa06c540ce2852b158dfe31c97c13, type: 3}
+  m_OptionPrefabs: []
   m_CloseButton: {fileID: 95696067}
   m_ResetButton: {fileID: 841175690}
   m_PhysicsButton: {fileID: 664039795}
@@ -1395,7 +1463,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1713521789}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 361866169}
+        m_TargetAssemblyTypeName: MetaXR.LofiStudy.ARFoundation.CameraFeedSpawner,
+          Assembly-CSharp
+        m_MethodName: SpawnFeedScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1713521789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2098,3 +2179,4 @@ SceneRoots:
   - {fileID: 1167467081}
   - {fileID: 1729285298}
   - {fileID: 674460047}
+  - {fileID: 361866168}
