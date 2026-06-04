@@ -72,6 +72,8 @@ namespace MetaXR.LofiStudy.ARFoundation
             DontDestroyOnLoad(gameObject); // survives scene loads if you ever add more scenes
 
             LiveTexture = new Texture2D(initialWidth, initialHeight, TextureFormat.RGB24, false);
+            LiveTexture.filterMode  = FilterMode.Bilinear;  // smooth scaling, no jagged lines
+            LiveTexture.anisoLevel  = 4;                    // reduces blur at angles in Quest
         }
 
         void Start()
