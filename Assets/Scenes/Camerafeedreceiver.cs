@@ -71,9 +71,9 @@ namespace MetaXR.LofiStudy.ARFoundation
             Instance = this;
             DontDestroyOnLoad(gameObject); // survives scene loads if you ever add more scenes
 
-            LiveTexture = new Texture2D(initialWidth, initialHeight, TextureFormat.RGB24, false);
-            LiveTexture.filterMode  = FilterMode.Bilinear;  // smooth scaling, no jagged lines
-            LiveTexture.anisoLevel  = 4;                    // reduces blur at angles in Quest
+            LiveTexture = new Texture2D(initialWidth, initialHeight, TextureFormat.RGB24, true);
+            LiveTexture.filterMode  = FilterMode.Trilinear;
+            LiveTexture.anisoLevel  = 8;
         }
 
         void Start()
@@ -83,16 +83,15 @@ namespace MetaXR.LofiStudy.ARFoundation
             m_Thread.Start();
         }
 
+        
         void Update()
         {
-            // Frame decode happens on the main thread to keep Unity API calls safe
             if (!m_NewFrameReady || m_PendingFrame == null)
                 return;
 
             m_NewFrameReady = false;
-
-            LiveTexture.LoadImage(m_PendingFrame); // handles resize automatically
-            LiveTexture.Apply();
+            LiveTexture.LoadImage(m_PendingFrame);
+            LiveTexture.Apply(true); // generates mipmaps — fixes distance flickering
             framesReceived++;
         }
 
