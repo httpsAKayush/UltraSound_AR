@@ -470,6 +470,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   placementUI: {fileID: 674460041}
   controlPanel: {fileID: 361866170}
+  placers: []
 --- !u!114 &361866170
 MonoBehaviour:
   m_ObjectHideFlags: 0
