@@ -517,7 +517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3945963d31e1e39b78b6ddbc4936326d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3945963d31e1e39b78b6ddbc4936326d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -529,23 +529,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3945963d31e1e39b78b6ddbc4936326d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3945963d31e1e39b78b6ddbc4936326d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3945963d31e1e39b78b6ddbc4936326d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3945963d31e1e39b78b6ddbc4936326d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3945963d31e1e39b78b6ddbc4936326d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3945963d31e1e39b78b6ddbc4936326d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -553,7 +553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3945963d31e1e39b78b6ddbc4936326d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 270
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3945963d31e1e39b78b6ddbc4936326d, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -2126,7 +2126,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1907736872}
   - component: {fileID: 1907736873}
-  - component: {fileID: 1907736874}
   m_Layer: 0
   m_Name: AnatomyManager
   m_TagString: Untagged
@@ -2167,23 +2166,6 @@ MonoBehaviour:
   proximityRadius: 0.05
   defaultMaterial: {fileID: 2100000, guid: 0c4c4f537190980aabd385e244257122, type: 2}
   highlightMaterial: {fileID: 2100000, guid: 7b92e7df75a5ad14481d2278b8f352ea, type: 2}
---- !u!114 &1907736874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907736870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 473b516485dc1c68a88b4b3b6586e52d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  bodyRoot: {fileID: 1570674334}
-  gizmoRadius: 0.3
-  ringThickness: 0.01
-  arrowLength: 0.4
-  handleSize: 0.03
 --- !u!1 &1917660569 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5632266133985503990, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
