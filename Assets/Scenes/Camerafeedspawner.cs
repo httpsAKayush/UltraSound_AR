@@ -50,7 +50,7 @@ namespace MetaXR.LofiStudy.ARFoundation
                                 + Vector3.up * verticalOffset;
 
             // Face screen toward player
-            var lookDir       = cameraTransform.position - spawnPosition;
+            var lookDir       = spawnPosition - cameraTransform.position;
             lookDir.y         = 0;
             var spawnRotation = lookDir.sqrMagnitude > 0.001f
                                 ? Quaternion.LookRotation(lookDir.normalized, Vector3.up)

@@ -94,9 +94,9 @@ public class PatientModelLoader : MonoBehaviour
 
                         if (firstDiscovery)
                             pendingStatus = $"Server found: {serverIP}";
-                            // // Stop discovery — we have what we need
-                            // discoveryRunning = false;
-                            // break;
+                            // Stop discovery — we have what we need
+                            discoveryRunning = false;
+                            break;
                     }
                 }
                 catch (SocketException)

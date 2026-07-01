@@ -77,9 +77,9 @@ public class ServerDiscovery : MonoBehaviour
                         DiscoveredPorts = ports;
                     }
                     Debug.Log($"[ServerDiscovery] Discovered {serviceName} at {DiscoveredIP}");
-                    // // Stop listening once discovered
-                    // running = false;
-                    // break;
+                    // Stop listening once discovered
+                    running = false;
+                    break;
                 }
                 catch (SocketException)
                 {
