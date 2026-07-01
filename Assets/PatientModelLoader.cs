@@ -63,10 +63,18 @@ public class PatientModelLoader : MonoBehaviour
 
     private void DiscoveryLoop()
     {
+        const string MulticastGroup = "239.255.42.42";
         try
         {
-            discoveryClient = new UdpClient(BroadcastPort);
-            discoveryClient.Client.ReceiveTimeout = 5000;
+            discoveryClient = new UdpClient();
+            discoveryClient.Client.SetSocketOption(
+                SocketOptionLevel.Socket,
+                SocketOptionName.ReuseAddress, true);
+            discoveryClient.Client.Bind(
+                new IPEndPoint(IPAddress.Any, BroadcastPort));
+            discoveryClient.JoinMulticastGroup(
+                IPAddress.Parse(MulticastGroup));
+            discoveryClient.Client.ReceiveTimeout = 5010;
 
             while (discoveryRunning)
             {
@@ -85,16 +93,19 @@ public class PatientModelLoader : MonoBehaviour
                         tcpPort = info.tcp_port;
 
                         if (firstDiscovery)
-                        {
                             pendingStatus = $"Server found: {serverIP}";
-                        }
+                            // // Stop discovery — we have what we need
+                            // discoveryRunning = false;
+                            // break;
                     }
                 }
                 catch (SocketException)
                 {
-                    // timeout, just loop again
+                    // timeout, loop again
                 }
             }
+
+            discoveryClient.DropMulticastGroup(IPAddress.Parse(MulticastGroup));
         }
         catch (Exception e)
         {

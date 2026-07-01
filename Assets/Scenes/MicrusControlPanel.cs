@@ -11,7 +11,10 @@ namespace MetaXR.LofiStudy.ARFoundation
     public class MicrusControlPanel : MonoBehaviour
     {
         [Header("Network")]
-        public string pcIP        = "192.168.x.x";
+        [Tooltip("Discovery component for the ultrasound PC. Auto-fills IP/port via UDP broadcast.")]
+        public ServerDiscovery ultrasoundDiscovery;
+
+        public string pcIP        = "192.168.x.x";   // fallback / last-known
         public int    commandPort = 5001;
 
         [Header("Panel Appearance")]
@@ -41,7 +44,18 @@ namespace MetaXR.LofiStudy.ARFoundation
 
         void Awake()
         {
-            m_Udp      = new UdpClient();
+            m_Udp = new UdpClient();
+            RefreshEndpoint();
+        }
+
+        void RefreshEndpoint()
+        {
+            if (ultrasoundDiscovery != null && ultrasoundDiscovery.IsDiscovered)
+            {
+                pcIP = ultrasoundDiscovery.DiscoveredIP;
+                int discoveredPort = ultrasoundDiscovery.GetPort("control");
+                if (discoveredPort > 0) commandPort = discoveredPort;
+            }
             m_Endpoint = new IPEndPoint(IPAddress.Parse(pcIP), commandPort);
         }
 
@@ -361,6 +375,7 @@ namespace MetaXR.LofiStudy.ARFoundation
         {
             try
             {
+                RefreshEndpoint();   // pick up latest discovered IP/port if changed
                 byte[] data = Encoding.UTF8.GetBytes(command);
                 m_Udp.Send(data, data.Length, m_Endpoint);
                 Debug.Log($"[MicrusControlPanel] Sent command: {command}");

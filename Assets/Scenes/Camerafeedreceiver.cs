@@ -24,11 +24,11 @@ namespace MetaXR.LofiStudy.ARFoundation
 
         // ── Inspector fields ─────────────────────────────────────────────────────
         [Header("Network")]
-        [Tooltip("IP of the PC running the camera server. " +
-                 "Hotspot: use the PC's mobile-network IP. LAN: use the PC's local IP.")]
-        public string serverIP   = "192.168.x.x";   // <- replace before testing
+        [Tooltip("Discovery component for the ultrasound PC. Auto-fills IP/port via UDP broadcast.")]
+        public ServerDiscovery ultrasoundDiscovery;
 
-        [Tooltip("Must match the port in your Python sender script.")]
+        [Tooltip("Fallback IP if discovery hasn't found the server yet (used only on first attempt).")]
+        public string serverIP   = "192.168.x.x";
         public int    serverPort = 5000;
 
         [Tooltip("Seconds to wait before retrying a failed connection.")]
@@ -110,8 +110,37 @@ namespace MetaXR.LofiStudy.ARFoundation
         {
             while (m_Running)
             {
+                //
+                while (m_Running &&
+                    (ultrasoundDiscovery == null || !ultrasoundDiscovery.IsDiscovered))
+                {
+                    Debug.Log("[CameraFeedReceiver] Waiting for server discovery...");
+                    Thread.Sleep(500);
+                }
+
+                if (!m_Running)
+                    break;
+
+                //
+
                 try
                 {
+                    // Pull latest discovered IP/port if available
+                    // if (ultrasoundDiscovery != null && ultrasoundDiscovery.IsDiscovered)
+                    // {
+                    //     serverIP   = ultrasoundDiscovery.DiscoveredIP;
+                    //     int discoveredPort = ultrasoundDiscovery.GetPort("video");
+                    //     if (discoveredPort > 0) serverPort = discoveredPort;
+                    // }
+                    serverIP = ultrasoundDiscovery.DiscoveredIP;
+                    int discoveredPort = ultrasoundDiscovery.GetPort("video");
+
+                    Debug.Log($"DISCOVERED IP = {serverIP}");
+                    Debug.Log($"DISCOVERED PORT = {discoveredPort}");
+
+                    if (discoveredPort > 0)
+                        serverPort = discoveredPort;
+
                     Debug.Log($"[CameraFeedReceiver] Connecting to {serverIP}:{serverPort}…");
 
                     m_Client = new TcpClient();
